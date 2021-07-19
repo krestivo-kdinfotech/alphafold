@@ -12,11 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ARG CUDA=11.0
-FROM nvidia/cuda:${CUDA}-cudnn8-runtime-ubuntu16.04
+
+ARG CUDA_FULL=11.2.2
+FROM nvidia/cuda:${CUDA_FULL}-cudnn8-runtime-ubuntu20.04
 # FROM directive resets ARGS, so we specify again (the value is retained if
 # previously set).
-ARG CUDA
+ARG CUDA_FULL
+ARG CUDA=11.2
+# JAXLIB no longer built for all minor CUDA versions:
+# https://github.com/google/jax/blob/main/CHANGELOG.md#jaxlib-0166-may-11-2021
+ARG CUDA_JAXLIB=11.1
 
 # Use bash to support string substitution.
 SHELL ["/bin/bash", "-c"]
@@ -53,7 +58,7 @@ ENV PATH="/opt/conda/bin:$PATH"
 RUN conda update -qy conda \
     && conda install -y -c conda-forge \
       openmm=7.5.1 \
-      cudatoolkit==${CUDA_VERSION} \
+      cudatoolkit==${CUDA_FULL} \
       pdbfixer \
       pip \
       python=3.7
@@ -65,7 +70,7 @@ RUN wget -q -P /app/alphafold/alphafold/common/ \
 # Install pip packages.
 RUN pip3 install --upgrade pip \
     && pip3 install -r /app/alphafold/requirements.txt \
-    && pip3 install --upgrade jax jaxlib==0.1.69+cuda${CUDA/./} -f \
+    && pip3 install --upgrade jax jaxlib==0.1.69+cuda${CUDA_JAXLIB/./} -f \
       https://storage.googleapis.com/jax-releases/jax_releases.html
 
 # Apply OpenMM patch.
