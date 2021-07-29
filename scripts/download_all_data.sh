@@ -65,5 +65,5 @@ bash "${SCRIPT_DIR}/download_uniclust30.sh" "${DOWNLOAD_DIR}"
 echo "Downloading Uniref90..."
 bash "${SCRIPT_DIR}/download_uniref90.sh" "${DOWNLOAD_DIR}"
 
-echo "All data downloaded."
+echo "All data downloaded. Waiting for untarring to complete, this may take a while."
 exit 0
