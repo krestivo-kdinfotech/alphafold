@@ -27,6 +27,9 @@ from docker import types
 
 #### USER CONFIGURATION ####
 
+logging.set_verbosity(logging.INFO)
+
+
 # Set to target of scripts/download_all_databases.sh
 DOWNLOAD_DIR = '/data/alpha'
 
