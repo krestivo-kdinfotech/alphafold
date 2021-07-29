@@ -66,3 +66,4 @@ echo "Downloading Uniref90..."
 bash "${SCRIPT_DIR}/download_uniref90.sh" "${DOWNLOAD_DIR}"
 
 echo "All data downloaded."
+exit 0

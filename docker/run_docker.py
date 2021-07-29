@@ -28,13 +28,13 @@ from docker import types
 #### USER CONFIGURATION ####
 
 # Set to target of scripts/download_all_databases.sh
-DOWNLOAD_DIR = 'SET ME'
+DOWNLOAD_DIR = '/data/alpha'
 
 # Name of the AlphaFold Docker image.
 docker_image_name = 'alphafold'
 
 # Path to a directory that will store the results.
-output_dir = '/tmp/alphafold'
+output_dir = '/data/output'
 
 # Names of models to use.
 model_names = [
